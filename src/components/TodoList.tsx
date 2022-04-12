@@ -35,37 +35,9 @@ export default TodoList;
  * 
  * 3) targetIndex의 Todo를 new ToDo로 바꾸기
  * 
- */
-
-/**
- * 1) find to do based on id [2]
+ * 4) 배열의 원소를 어떻게 교체하는지를 알기
+ *    
+ *      slice를 사용하면 배열을 자를 수 있다.
  * 
  */
 
-// [
-//   {
-//       "text": "5",
-//       "id": 1649777620793,
-//       "category": "TO_DO"
-//   },
-//   {
-//       "text": "4",
-//       "id": 1649777619863,
-//       "category": "TO_DO"
-//   },
-//   {
-//       "text": "3",
-//       "id": 1649777619158,
-//       "category": "TO_DO"
-//   },
-//   {
-//       "text": "2",
-//       "id": 1649777618397,
-//       "category": "TO_DO"
-//   },
-//   {
-//       "text": "1",
-//       "id": 1649777618074,
-//       "category": "TO_DO"
-//   }
-// ]

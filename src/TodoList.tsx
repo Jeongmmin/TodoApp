@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 // useFrom (react-hook-form) 이전의 코드
 // function TodoList() {
@@ -40,41 +40,102 @@ import { useForm } from "react-hook-form"
 //   );
 // }
 
-// useForm 이후 -> onChange, vlaue, useState 모두 대체 이미 onChange도 가지고 있다. watch 우리의 입력 값 감시해 줌
+interface IForm {
+  email: string;
+  first_name: string;
+  last_name: string;
+  user_name: string;
+  password: string;
+  password1: string;
+  // 만약 필수인 항목이 아니라면 ?를 붙여주여야 한다.
+  // ex. lastName?: string
+}
 
 function TodoList() {
-  const { register, handleSubmit, formState } = useForm(); 
+  // error 분해
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({
+    defaultValues: { 
+      email:"@naver.com"
+     }
+  });
   // react-hook-form이 모든 validation을 다 마쳤을 때만 호출될 함수
   const onValid = (data: any) => {
     console.log(data);
-  }
-  console.log(formState.errors)
+  };
+  // console.log(errors);
   return (
     <div>
-      <form style={{display: 'flex', flexDirection: "column"}} onSubmit={handleSubmit(onValid)}>
-        <input {...register("Email", {required: true, minLength: 10})} placeholder="Email" />
-        <input {...register("First_name", {required: true})} placeholder="First Name" />
-        <input {...register("Last_name", {required: true})} placeholder="Last Name" />
-        <input {...register("User_name", {required: true})} placeholder="User Name" />
-        <input {...register("Password", {required: true, minLength: 5})} placeholder="Password" />
-        <input {...register("Password1", {required: "Password is required", minLength: {value :5, message: "Pw too short"}})} placeholder="Password1" />
+      <form
+        style={{ display: "flex", flexDirection: "column" }}
+        onSubmit={handleSubmit(onValid)}
+      >
+        <input
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Za-z0-9._%+-]+@naver.com$/,
+              message: "Only naver.com emails allowed",
+            },
+          })}
+          placeholder="Email"
+        />
+        <span>{errors?.email?.message}</span>
+        {/* 사용자에게 Error 보여주기 */}
+        <input
+          {...register("first_name", { required: "write here" })}
+          placeholder="First Name"
+        />
+        <span>{errors?.first_name?.message}</span>
+        <input
+          {...register("last_name", { required: "write here" })}
+          placeholder="Last Name"
+        />
+        <span>{errors?.last_name?.message}</span>
+        <input
+          {...register("user_name", { required: "write here" })}
+          placeholder="User Name"
+        />
+        <span>{errors?.user_name?.message}</span>
+        <input
+          {...register("password", {
+            required: "Password is required",
+            minLength: 5,
+          })}
+          placeholder="Password"
+        />
+        <span>{errors?.password?.message}</span>
+        <input
+          {...register("password1", {
+            required: "Password is required",
+            minLength: { value: 5, message: "Pw too short" },
+          })}
+          placeholder="password1"
+        />
+        <span>{errors?.first_name?.message}</span>
         <button>Add</button>
       </form>
     </div>
-  )
+  );
 }
-
 
 export default TodoList;
 
-// onSubmit 대체하기
+// Validation 방법 + a => '정규표현식' https://www.regexpal.com/
 /**
- * handleSubmit - validation, preventDefault 담당 / 2개의 argument를 받는다(데이터유효할 때, 유효하지 않을 때)
- * () => 함수 호출
- * required 그냥 넣으면 누군가 인터넷 상의 코드를 지우면 정상적으로 동작할 위험이 있다.
- * HTML로 보호받는 것은 좋지만 사용자가 이 기능을 지원하지 않는 브라우저에 읶거나, 지원하지 않는 모바일에서 본다면 보호 받지 못한다.
- * 그래서 JS에서 validation 하는 것이다. 자동으로 에러가 일어난 곳으로 커서를 옮겨준다.(focus)
- *minLength: 10 이렇게만 써줘도 10글자 제한 가능
-
- 에러 받기 - formState  console.log(formState.errors)해보면 에러가 자동으로 컨드롤 되고 있다.
+ * /^[A-Za-z0-9._%+-]+@naver.com$/ = 앞자리에 대,소문자 a -z, 숫자 0-9까지를 모두 포함하고 뒷자리는 naver.com과 일치하겠다는 의미
+ * 옵션 - 2가지, 바로 값 보내기, 다른 하나는 객체에 넣어서 보내기
+ *
+ * 에러를 사용자에게 보여주자.
+ *
+ * required를 체크하려면 error 나오는 곳 말고, required에 하면 된다. 또 타입을 체크할 필요는 없다.
+ *
+ * 에러 : 처음에는 안 보이고 Add눌러서 제출해야만 보인다.
+ *
+ * 에러난 항목의 테두리를 빨갛게 하는가 하는 방법이 있다. (도전?)
+ *
+ * 타입스크립트에게 나의 form의 모양을 어떻게 알려줘야 하는가? -> interface사용
  */

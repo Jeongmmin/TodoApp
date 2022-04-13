@@ -1,15 +1,29 @@
 import { atom, selector } from "recoil";
 
+// type : 복붙을 하지 않게 해주는 문법 -> enum으로 고쳐보자(코드 전체에서 각각 사용할 수 있도록 수정)
+// enum = enumerable (셀 수 있는, 열거)
+// type categories = "TO_DO" | "DOING" | "DONE"
+export enum Categories {
+  // "TO_DO",
+  // "DOING",
+  // "DONE",
+  // 원한다면 type을 바꿀 수 있다.
+  "TO_DO" = "TO_DO",
+  "DOING" ="DOING",
+  "DONE" = "DONE",
+}
+
 // 공통적으로 많이 쓰이니까 atom으로 분리
 export interface IToDo {
   text: string;
   id: number;
-  category: "TO_DO" | "DOING" | "DONE";
+  category: Categories;
 }
 
-export const categoryState = atom({
+// 티입스크립트에게 카테고리가 3가지 유형 중 하나라고 설명
+export const categoryState = atom<Categories>({
   key: "category",
-  default: "TO_DO",
+  default: Categories.TO_DO,
 });
 
 export const toDoState = atom<IToDo[]>({

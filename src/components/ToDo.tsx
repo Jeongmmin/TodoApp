@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atoms";
+import { Categories, IToDo, toDoState } from "../atoms";
 
 
 function ToDo({ text, category, id }: IToDo) {
@@ -29,18 +29,20 @@ function ToDo({ text, category, id }: IToDo) {
     <li>
       <span>{text}</span>
       {/* 카테고리가 "값" 이 아닐 때만 값을 보여준다. */}
-      {category !== "DOING" && (
-        <button name="DOING" onClick={onClick}>
+      {category !== Categories.DOING && (
+        // enum이 text면 + "" 안 해도 된다.
+        // <button name={Categories.DOING + ""} onClick={onClick}>
+        <button name={Categories.DOING } onClick={onClick}>
           Doing
         </button>
       )}
-      {category !== "TO_DO" && (
-        <button name="TO_DO" onClick={onClick}>
+      {category !== Categories.TO_DO && (
+        <button name={Categories.TO_DO} onClick={onClick}>
           To Do
         </button>
       )}
-      {category !== "DONE" && (
-        <button name="DONE" onClick={onClick}>
+      {category !== Categories.DONE && (
+        <button name={Categories.DONE} onClick={onClick}>
           Done
         </button>
       )}
@@ -49,3 +51,5 @@ function ToDo({ text, category, id }: IToDo) {
 }
 
 export default ToDo;
+
+// enum은 숫자로 표현되서 name에서 오류가 난다.

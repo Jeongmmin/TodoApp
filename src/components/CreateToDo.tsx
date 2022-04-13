@@ -34,5 +34,3 @@ function CreateToDo() {
 }
 
 export default CreateToDo;
-
-// toDo의 카테고리가 categoryState에 따라서 추가되게 만들고 싶다.

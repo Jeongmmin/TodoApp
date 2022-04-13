@@ -1,26 +1,25 @@
 import { atom, selector } from "recoil";
-import { recoilPersist } from 'recoil-persist';
+import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
-// Categories Enum
-export enum Categories {
-  "TO_DO" = "TO_DO",
-  "DOING" ="DOING",
-  "DONE" = "DONE",
-}
+export const Categories = atom<string[]>({
+  key: "cateId",
+  default: ["TO_DO", "DOING", "DONE"],
+  effects_UNSTABLE: [persistAtom],
+});
 
 // 공통적으로 많이 쓰이니까 atom으로 분리
 export interface IToDo {
   text: string;
   id: number;
-  category: Categories;
+  category: string;
 }
 
-// 티입스크립트에게 카테고리가 3가지 유형 중 하나라고 설명
-export const categoryState = atom<Categories>({
+// 타입스크립트에게 카테고리가 3가지 유형 중 하나라고 설명
+export const categoryState = atom({
   key: "category",
-  default: Categories.TO_DO,
+  default: "TO_DO",
 });
 
 export const toDoState = atom<IToDo[]>({
@@ -37,4 +36,3 @@ export const toDoSelector = selector({
     return toDos.filter((toDo) => toDo.category === category);
   },
 });
-

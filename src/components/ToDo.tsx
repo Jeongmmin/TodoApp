@@ -25,6 +25,17 @@ function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+
+  // Todo 삭제
+  const handleRomoveToDo = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setToDos((oldToDos) => {
+      // index가 같은지 비교하는 함수
+      let newToDos = oldToDos.filter((toDo) => toDo.id !== id);
+      // todo update
+     return newToDos;
+    }
+    );
+  }
   return (
     <li>
       <span>{text}</span>
@@ -44,6 +55,9 @@ function ToDo({ text, category, id }: IToDo) {
           Done
         </button>
       )}
+        <button  onClick={handleRomoveToDo}>
+          ❌
+        </button>
     </li>
   );
 }

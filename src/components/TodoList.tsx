@@ -16,6 +16,8 @@ function TodoList() {
     <div>
       <h1>To Dos</h1>
       <hr />
+      {/* <input type="text" /><input type="text" placeholder="
+      categories" /> */}
       <select value={category} onInput={onInput}>
         <option value={Categories.TO_DO}>To do</option>
         <option value={Categories.DOING}>Doing</option>

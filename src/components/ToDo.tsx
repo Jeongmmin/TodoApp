@@ -30,8 +30,6 @@ function ToDo({ text, category, id }: IToDo) {
       <span>{text}</span>
       {/* 카테고리가 "값" 이 아닐 때만 값을 보여준다. */}
       {category !== Categories.DOING && (
-        // enum이 text면 + "" 안 해도 된다.
-        // <button name={Categories.DOING + ""} onClick={onClick}>
         <button name={Categories.DOING } onClick={onClick}>
           Doing
         </button>
@@ -51,5 +49,3 @@ function ToDo({ text, category, id }: IToDo) {
 }
 
 export default ToDo;
-
-// enum은 숫자로 표현되서 name에서 오류가 난다.

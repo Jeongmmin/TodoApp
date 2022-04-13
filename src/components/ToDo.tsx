@@ -5,20 +5,47 @@ import { AddBtn } from './CustomCategory';
 
 const ToDoList = styled.li`
   list-style: none;
-  padding: 10px 50px;
-  margin: 10px;
-  /* display: flex; */
-  /* justify-content:space-between; */
+  margin: 10px 0;
+  display: flex;
+  justify-content:space-between;
+  
+  span {
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    align-items:center;
+    border: none;
+    width: 450px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+  }
 
 `;
 
 const CategoryBtn = styled(AddBtn)`
   padding: 10px;
-  margin: 5px;
+  margin: 0;
+  border-radius: 30px;
+  font-size: 13px;
+  :hover {
+    background-color: #bdd198;
+    box-shadow: 0px 15px 20px rgba(158, 182, 110, 0.4);
+    }
 `;
 
 const DelBtn = styled(AddBtn)`
   padding: 10px 20px;
+  color: #fa7070;
+  margin: 0;
+  border-radius: 30px;
+  font-size: 14px;
+  :hover {
+    background-color: #fa7070;
+    box-shadow: 0px 15px 20px rgba(248, 149, 149, 0.4);
+    color: whitesmoke;
+    }
 `;
 
 
@@ -71,7 +98,7 @@ function ToDo({ text, category, id }: IToDo) {
             </CategoryBtn>
           )
       )}
-      <DelBtn onClick={handleRomoveToDo}>❌</DelBtn>
+      <DelBtn onClick={handleRomoveToDo}>X</DelBtn>
     </ToDoList>
   );
 }

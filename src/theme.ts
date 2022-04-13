@@ -14,8 +14,8 @@ import { DefaultTheme } from 'styled-components'
 // }
 
 export const lightTheme:DefaultTheme = {
-  bgColor: 'whitesmoke',
-  textColor: "#2a2a2b",
+  bgColor: '#e6eefa',
+  textColor: "#595a5a",
   accentColor: "#9c88ff",
   cardBgColor: "white",
   priceTitleColor: "#929598",

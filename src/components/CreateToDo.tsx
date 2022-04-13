@@ -1,7 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from 'styled-components';
 import { categoryState, toDoState } from "../atoms";
-import { AddBtn, CategoryInput, FormBox } from './CustomCategory';
+import { AddBtn, CategoryInput, FormBox } from "./CustomCategory";
+
+const TodoInput = styled(CategoryInput)`
+  text-transform: none;
+`;
 
 interface IForm {
   toDo: string;
@@ -22,14 +27,14 @@ function CreateToDo() {
   };
 
   return (
-    <FormBox onSubmit={handleSubmit(handelValid)}>
-      <CategoryInput
+    <FormBox onSubmit={handleSubmit(handelValid)} autoComplete="off">
+      <TodoInput
         {...register("toDo", {
           required: "Please write a to do",
         })}
-        placeholder="Write a to do"
+        placeholder="WRITE A TODO"
       />
-      <AddBtn>Add</AddBtn>
+      <AddBtn>+</AddBtn>
     </FormBox>
   );
 }

@@ -6,21 +6,33 @@ import CustomCategory from './CustomCategory';
 import ToDo from "./ToDo";
 
 const Container = styled.div`
-margin: 0 auto;
+margin: 10px auto;
 display:flex;
 flex-direction: column;
 justify-content: center;
-max-width: 480px;
+max-width: 780px;
 `;
 
 const Title = styled.h1`
   font-size: 32px;
   padding: 20px;
+  margin: 0 auto;
 `;
 
 const SelectorOuter = styled.div`
-padding: 0 20px;
-  margin: 10px;
+  margin: 10px 0;
+  select {
+    padding: 10px;
+    border: none;
+    color: whitesmoke;
+    border-radius: 20px;
+    background-color: rgba(16, 78, 140, 0.734);
+    text-transform: uppercase;
+    cursor: pointer;
+    :focus {
+      outline: none;
+    }
+  }
 `;
 
 function TodoList() {
@@ -35,7 +47,7 @@ function TodoList() {
   console.log(toDos)
   return (
     <Container>
-      <Title>📚To Do List</Title>
+      <Title>📓 To Do List</Title>
       <hr />
       <CustomCategory />
       <SelectorOuter>

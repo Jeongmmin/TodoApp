@@ -1,8 +1,27 @@
 import { useRecoilState, useRecoilValue } from "recoil";
+import styled from 'styled-components';
 import {Categories, categoryState, toDoSelector } from "../atoms";
 import CreateToDo from "./CreateToDo";
 import CustomCategory from './CustomCategory';
 import ToDo from "./ToDo";
+
+const Container = styled.div`
+margin: 0 auto;
+display:flex;
+flex-direction: column;
+justify-content: center;
+max-width: 480px;
+`;
+
+const Title = styled.h1`
+  font-size: 32px;
+  padding: 20px;
+`;
+
+const SelectorOuter = styled.div`
+padding: 0 20px;
+  margin: 10px;
+`;
 
 function TodoList() {
   // 배열이 return될때
@@ -15,25 +34,20 @@ function TodoList() {
   };
   console.log(toDos)
   return (
-    <div>
-      <h1>To Dos</h1>
+    <Container>
+      <Title>📚To Do List</Title>
       <hr />
-      {/* <input type="text" /><input type="text" placeholder="
-      categories" /> */}
-      {/* <select value={category} onInput={onInput}>
-        <option value={"TO_DO"}>To do</option>
-        <option value={"DOING"}>Doing</option>
-        <option value={"DONE"}>Done</option>
-      </select> */}
       <CustomCategory />
+      <SelectorOuter>
       <select value ={category} onInput={onInput}>
         {CustomCategories.map((userCategory) => (
           <option key={userCategory} value={userCategory}>{userCategory}</option>
         ))}
       </select>
+      </SelectorOuter>
       <CreateToDo />
       {toDos?.map((toDo) => <ToDo key={toDo.id} {...toDo}/>)}
-    </div>
+    </Container>
   );
 }
 

@@ -5,7 +5,7 @@ const { persistAtom } = recoilPersist();
 
 export const Categories = atom<string[]>({
   key: "cateId",
-  default: ["TO_DO", "DOING", "DONE"],
+  default: ["TO DO", "DOING", "DONE"],
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -19,7 +19,7 @@ export interface IToDo {
 // 타입스크립트에게 카테고리가 3가지 유형 중 하나라고 설명
 export const categoryState = atom({
   key: "category",
-  default: "TO_DO",
+  default: "TO DO",
 });
 
 export const toDoState = atom<IToDo[]>({

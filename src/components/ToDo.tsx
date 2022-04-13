@@ -1,5 +1,28 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from 'styled-components';
 import { Categories, IToDo, toDoState } from "../atoms";
+import { AddBtn } from './CustomCategory';
+
+const ToDoList = styled.li`
+  list-style: none;
+  padding: 10px 50px;
+  margin: 10px;
+  /* display: flex; */
+  /* justify-content:space-between; */
+
+`;
+
+const CategoryBtn = styled(AddBtn)`
+  padding: 10px;
+  margin: 5px;
+`;
+
+const DelBtn = styled(AddBtn)`
+  padding: 10px 20px;
+`;
+
+
+
 
 function ToDo({ text, category, id }: IToDo) {
   // toDo state를 수정하기 위함
@@ -37,19 +60,19 @@ function ToDo({ text, category, id }: IToDo) {
     });
   };
   return (
-    <li>
+    <ToDoList>
       <span>{text}</span>
       {/* 카테고리가 "값" 이 아닐 때만 값을 보여준다. */}
       {CustomCategories.map(
         (inputValue) =>
           category !== inputValue && (
-            <button key={inputValue} name={inputValue} onClick={onClick}>
+            <CategoryBtn key={inputValue} name={inputValue} onClick={onClick}>
               {inputValue}
-            </button>
+            </CategoryBtn>
           )
       )}
-      <button onClick={handleRomoveToDo}>❌</button>
-    </li>
+      <DelBtn onClick={handleRomoveToDo}>❌</DelBtn>
+    </ToDoList>
   );
 }
 
